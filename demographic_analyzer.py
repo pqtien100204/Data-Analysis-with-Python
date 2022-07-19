@@ -110,12 +110,34 @@ def calculate_demographic_data(print_data=False):
             total_country_both_high_and_low_earning[people_in_evr_coun] += 1      
     print(total_country_both_high_and_low_earning)      
 
-    highest_earning_country = None
+    result_with_country_and_percent = {}
+    for indexing, valueing in country_with_its_highest_earning.items():
+        for indesing, valueyng in total_country_both_high_and_low_earning.items():
+            if indexing == indesing:
+                result_with_country_and_percent[indexing] = (valueing / valueyng) * 100
+  
+    country_in_name = list(result_with_country_and_percent.keys())
+    country_in_figure = list(result_with_country_and_percent.values())
+    richest_country_in_figure = max(country_in_figure)
+    the_position = country_in_figure.index(richest_country_in_figure)
+    highest_earning_country = country_in_name[the_position]
 
-    highest_earning_country_percentage = None
+    highest_earning_country_percentage = round(country_in_figure[the_position], 1)
 
     # Identify the most popular occupation for those who earn >50K in India.
-    top_IN_occupation = None
+    jobs_for_rich = {}
+    for number, people in df.iloc[:, 13].items():
+        if people == "India" and df.at[number, 'salary'] == ">50K":
+            if df.at[number, 'occupation'] not in jobs_for_rich.keys():
+                jobs_for_rich[df.at[number, 'occupation']] = 1
+            elif df.at[number, 'occupation'] in jobs_for_rich.keys():
+                jobs_for_rich[df.at[number, 'occupation']] += 1
+
+    jobs_in_name = list(jobs_for_rich.keys())
+    jobs_in_figure = list(jobs_for_rich.values())
+    most_popular_jobs_values = max(jobs_in_figure)
+    position = jobs_in_figure.index(most_popular_jobs_values)
+    top_IN_occupation = jobs_in_name[position]
 
     # DO NOT MODIFY BELOW THIS LINE
 
