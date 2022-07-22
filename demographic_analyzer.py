@@ -8,7 +8,7 @@ def calculate_demographic_data(print_data=False):
     #     dff = csv.reader(filee, delimiter=",")
     #     next(dff)  # skipping header
     #     listt = []
-    #     for index, content in enumerate(dff):
+    #     for index, content in enumerate(dff):    enumerate() create a list by adding serial number aside every value in a DataFrame,...
     #         if content[8]  not in listt:
     #             listt.append(content[8])
     #     print(listt)
